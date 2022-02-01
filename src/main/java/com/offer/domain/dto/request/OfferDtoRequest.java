@@ -48,6 +48,6 @@ public class OfferDtoRequest {
 	@Positive
 	private BigDecimal discount;
 
-	private String novoCampoParaRemoverDepois;
+	private Long novoCampoParaRemoverDepois;
 
 }
