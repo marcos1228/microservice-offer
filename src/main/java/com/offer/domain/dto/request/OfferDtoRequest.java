@@ -47,4 +47,7 @@ public class OfferDtoRequest {
 	@Range(min = 1, max = 50, message = "{discount.range}")
 	@Positive
 	private BigDecimal discount;
+
+	private String novoCampoParaRemoverDepois;
+
 }
