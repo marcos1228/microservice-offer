@@ -1,6 +1,5 @@
 package com.offer.service;
 
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -32,17 +31,11 @@ public class OfferService {
 
 	public OfferDtoResponse getOfferById(Long id) {
 		log.info("id [{}] will be for search for!", id);
-		Optional<Offer> offer = offerRepository.findById(id);
-//				.orElseThrow(() -> new BusinessException(messageBuilder.getMessage("message.exception")));
+		Offer offer = offerRepository.findById(id).orElseThrow(() -> new BusinessException(messageBuilder.getMessage("message.exception")));
 		log.warn("The return [{}]", offer);
 		return modelMapper.map(offer, OfferDtoResponse.class);
 	}
 
-	public OfferDtoResponse getProductById(Long id) {
-		Offer offer = offerRepository.findByidProduct(id)
-				.orElseThrow(() -> new BusinessException("não product não existe"));
-		return modelMapper.map(offer, OfferDtoResponse.class);
-	}
 
 	public Page<OfferDtoResponse> findByTitle(String title, Pageable pageable) {
 		Page<Offer> list = offerRepository.findByTitle(title, pageable);

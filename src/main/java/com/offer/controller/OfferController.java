@@ -40,7 +40,7 @@ import lombok.extern.slf4j.Slf4j;
 public class OfferController {
 	@Autowired
 	private OfferService service;
-
+	
 	@ApiOperation(value = "Buscar uma oferta pelo ID", notes = "Este endpoint busca uma oferta pelo id")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Oferta encontrada com sucesso"),
 			@ApiResponse(code = 404, message = "Oferta não encontrada"),
@@ -50,10 +50,6 @@ public class OfferController {
 	public ResponseEntity<OfferDtoResponse> getOfferById(@PathVariable Long id) {
 		log.info("The offer return");
 		return ResponseEntity.ok().body(service.getOfferById(id));
-	}
-	@GetMapping(value = "product/{id}")
-	public ResponseEntity<OfferDtoResponse> getProductById(@PathVariable long id) {
-		return ResponseEntity.ok().body(service.getProductById(id));
 	}
 
 	@ApiOperation(value = "Retorna uma lista de oferta", notes = "Este endpoint retorna uma lista de oferta")
