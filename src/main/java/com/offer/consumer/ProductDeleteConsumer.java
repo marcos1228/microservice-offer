@@ -20,8 +20,10 @@ public class ProductDeleteConsumer {
 		try {
 			service.delete(product.getId());
 			log.warn("Offer deleted for {}", product.getId());
-		} catch (Exception exception) {
-			//log.error("Exceptio" + exception);
+		} catch (Exception e) {
+			log.info("ERROR DEFAULT");
+			e.getCause();
+			e.getMessage();
 		}
 	}
 
