@@ -662,3 +662,14 @@
 { "timestamp": 20-01-2022 10:15:42.915, "message": No active profile set, falling back to default profiles: default, "logger_name": com.offer.OfferApplication, "thread_name": [restartedMain], "level": INFO  }
 { "timestamp": 20-01-2022 10:15:46.563, "message": Started OfferApplication in 3.94 seconds (JVM running for 4.919), "logger_name": com.offer.OfferApplication, "thread_name": [restartedMain], "level": INFO  }
 { "timestamp": 20-01-2022 10:15:46.566, "message": Microservice de offer pronto para receber requisições!, "logger_name": com.offer.OfferApplication, "thread_name": [restartedMain], "level": INFO  }
+{ "timestamp": 02-02-2022 09:46:07.010, "message": Offer deleted for 1, "logger_name": c.o.consumer.ProductDeleteConsumer, "thread_name": [main], "level": WARN  }
+{ "timestamp": 02-02-2022 09:46:07.348, "message": id [3] will be for search for!, "logger_name": com.offer.service.OfferService, "thread_name": [main], "level": INFO  }
+{ "timestamp": 02-02-2022 09:46:07.373, "message": id [1] will be for updated by, "logger_name": com.offer.service.OfferService, "thread_name": [main], "level": INFO  }
+{ "timestamp": 02-02-2022 09:46:07.374, "message": The updated [Offer(id=1, idProduct=2, title=Oferta de natal, dateStart=2021-10-27, dateEnd=2024-11-14, discount=1)], "logger_name": com.offer.service.OfferService, "thread_name": [main], "level": WARN  }
+{ "timestamp": 02-02-2022 09:46:07.386, "message": Offers will be listed in pageable form., "logger_name": com.offer.service.OfferService, "thread_name": [main], "level": INFO  }
+{ "timestamp": 02-02-2022 09:46:07.389, "message": The id delete [2], "logger_name": com.offer.service.OfferService, "thread_name": [main], "level": INFO  }
+{ "timestamp": 02-02-2022 09:46:07.390, "message": The product delete [Offer(id=1, idProduct=2, title=Oferta de natal, dateStart=2021-10-27, dateEnd=2024-11-14, discount=1)], "logger_name": com.offer.service.OfferService, "thread_name": [main], "level": WARN  }
+{ "timestamp": 02-02-2022 09:46:07.393, "message": The id delete [3], "logger_name": com.offer.service.OfferService, "thread_name": [main], "level": INFO  }
+{ "timestamp": 02-02-2022 09:46:07.398, "message": id [1] will be for search for!, "logger_name": com.offer.service.OfferService, "thread_name": [main], "level": INFO  }
+{ "timestamp": 02-02-2022 09:46:07.398, "message": The return [Offer(id=1, idProduct=2, title=Oferta de natal, dateStart=2021-10-27, dateEnd=2024-11-14, discount=1)], "logger_name": com.offer.service.OfferService, "thread_name": [main], "level": WARN  }
+{ "timestamp": 02-02-2022 09:46:07.401, "message": Successfully saved!, "logger_name": com.offer.service.OfferService, "thread_name": [main], "level": INFO  }
