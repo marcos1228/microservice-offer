@@ -16,17 +16,23 @@ import lombok.Data;
 @Entity
 @Table(name = "TB_OFFER")
 public class Offer {
+	
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@Column(name = "Idproduct")
 	private Long idProduct;
+	
 	@Column(name = "TX_TITLE")
 	private String title;
+	
 	@Column(name = "DT_DATESTAR")
 	private LocalDate dateStart;
+	
 	@Column(name = "DT_DATEEND")
 	private LocalDate dateEnd;
+	
 	@Column(name = "PC_DESCONTO")
 	private BigDecimal discount;
 }
