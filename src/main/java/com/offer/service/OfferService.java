@@ -29,7 +29,7 @@ public class OfferService {
 	private MessageBuilder messageBuilder;
 
 	public OfferDtoResponse getOfferById(Long id) {
-		log.info("Method={}", "getOfferById");
+		log.info("Method={} idOffer={}", "getOfferById", id);
 		Offer offer = offerRepository.findById(id)
 				.orElseThrow(() -> new BusinessException(messageBuilder.getMessage("message.exception")));
 		return modelMapper.map(offer, OfferDtoResponse.class);
@@ -50,7 +50,7 @@ public class OfferService {
 
 	@Transactional
 	public OfferDtoResponse update(Long id, OfferUpdateDtoRequest dto) {
-		log.info("Method={}", "update");
+		log.info("Method={} idOffer", "update", id);
 		Offer offer = offerRepository.findById(id)
 				.orElseThrow(() -> new BusinessException(messageBuilder.getMessage("message.exception")));
 		modelMapper.map(dto, offer);
@@ -60,7 +60,7 @@ public class OfferService {
 
 	@Transactional
 	public void delete(Long id) {
-		log.info("Method={}", "delete");
+		log.info("Method={} idOffer={}", "delete", id);
 		Offer offer = offerRepository.findByidProduct(id)
 				.orElseThrow(() -> new BusinessException(messageBuilder.getMessage("message.exception")));
 		offerRepository.delete(offer);
