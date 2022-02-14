@@ -48,7 +48,7 @@ public class OfferController {
 			@ApiResponse(code = 500, message = "Erro interno do servidor") })
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<OfferDtoResponse> getOfferById(@PathVariable Long id) {
-		log.info("The offer return");
+		log.info("Method={} message={}","getOfferById", "buscando por id");
 		return ResponseEntity.ok().body(service.getOfferById(id));
 	}
 
@@ -61,7 +61,7 @@ public class OfferController {
 	public ResponseEntity<Page<OfferDtoResponse>> findByTitle(
 			@RequestParam(required = false, defaultValue = "%") String title,
 			@PageableDefault(sort = "title", direction = Direction.ASC, page = 0, size = 5) Pageable pageable) {
-		log.info("Offers will be listed in pageable form");
+		log.info("Method={} message={}", "findByTitle", "lista oferta");
 		return ResponseEntity.ok().body(service.findByTitle(title, pageable));
 	}
 
@@ -74,7 +74,7 @@ public class OfferController {
 	public ResponseEntity<OfferDtoResponse> save(@Valid @RequestBody OfferDtoRequest offerDtoRequest) {
 		OfferDtoResponse save = service.save(offerDtoRequest);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(save.getId()).toUri();
-		log.info("The offer saved");
+		log.info("Method={} message={}", "save", "savando uma oferta");
 		return ResponseEntity.created(uri).body(save);
 	}
 
@@ -87,7 +87,7 @@ public class OfferController {
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<OfferDtoResponse> update(@PathVariable Long id,
 			@RequestBody @Valid OfferUpdateDtoRequest offerUpdateDtoRequest) {
-		log.info("The offer return");
+		log.info("Method={} message={}", "update", "atualizando uma oferta");
 		return ResponseEntity.ok().body(service.update(id, offerUpdateDtoRequest));
 	}
 
@@ -97,7 +97,7 @@ public class OfferController {
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		service.delete(id);
-		log.info("The  offer deleted");
+		log.info("Method={} message={}", "delete", "deleta uma oferta");
 		return ResponseEntity.noContent().build();
 	}
 

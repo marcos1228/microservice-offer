@@ -17,13 +17,11 @@ public class ProductDeleteConsumer {
 	
 	@RabbitListener(queues = "${product.delete.queue}", containerFactory = "productContainerFactory")
 	public void consumer(ProductDTO product) {
+		log.info("Method={}", "consumer");
 		try {
 			service.delete(product.getId());
-			log.warn("Offer deleted for {}", product.getId());
 		} catch (Exception e) {
-			log.info("ERROR DEFAULT");
-			e.getCause();
-			e.getMessage();
+			log.info("ERROR DEFAULT cause={}, message={} ", e.getCause(), e.getMessage());
 		}
 	}
 
