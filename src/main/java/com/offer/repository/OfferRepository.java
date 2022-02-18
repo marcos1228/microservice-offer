@@ -14,10 +14,11 @@ import com.offer.domain.model.Offer;
 
 @Repository
 public interface OfferRepository extends JpaRepository<Offer, Long> {
-	public List<Offer> findAllByIdIn(List<Long> ids);
+	public List<Long> findAllByIdIn(List<Long> ids);
 
 	public Optional<Offer> findByidProduct(Long long1);
 
 	@Query("SELECT m FROM Offer m WHERE m.title LIKE %:title%")
 	Page<Offer> findByTitle(@RequestParam("title") String title, Pageable pageable);
+
 }

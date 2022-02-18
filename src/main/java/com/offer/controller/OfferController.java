@@ -44,15 +44,15 @@ public class OfferController {
 	@Autowired
 	private OfferService service;
 	
-	@ApiOperation(value = "Buscar uma oferta pelo ID", notes = "Este endpoint busca uma oferta pelo id")
+	@ApiOperation(value = "Buscar varias ofertas pelos IDS", notes = "Este endpoint busca varias ofertas pelos ids")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Oferta encontrada com sucesso"),
 			@ApiResponse(code = 404, message = "Oferta não encontrada"),
 			@ApiResponse(code = 401, message = "O cliente deve está autenticado ao sistema"),
 			@ApiResponse(code = 500, message = "Erro interno do servidor") })
-	@PostMapping("teste")
-	public ResponseEntity<List<Long>> getOfferById(@RequestBody List<Long> ids) {
-		log.info("Method={} message={}","getOfferById", "buscando por id");
-		return ResponseEntity.ok().body(service.findAllByIdIn(ids));
+	@PostMapping("/")
+	public ResponseEntity<List<Long>> findAllByIds(@RequestBody List<Long> ids) {
+		log.info("Method={} message={}","findAllByIds", "buscando por ids");
+		return ResponseEntity.ok().body(service.findAllByIds(ids));
 	}
 
 	@ApiOperation(value = "Retorna uma lista de oferta", notes = "Este endpoint retorna uma lista de oferta")

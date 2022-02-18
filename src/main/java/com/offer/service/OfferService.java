@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import org.aspectj.apache.bcel.generic.RET;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -34,15 +35,10 @@ public class OfferService {
 	@Autowired
 	private MessageBuilder messageBuilder;
 
-	public OfferDtoResponse getOfferById(Long id) {
-		log.info("Method={} idOffer={}", "getOfferById", id);
-		Offer offer = offerRepository.findById(id)
-				.orElseThrow(() -> new BusinessException(messageBuilder.getMessage("message.exception")));
-		return modelMapper.map(offer, OfferDtoResponse.class);
-	}
 
-	public List<Long> findAllByIdIn(List<Long> ids) {
+	public List<Long> findAllByIds(List<Long> ids) {
 		List<Long> listOffer = new ArrayList<>();
+		log.info("Method={} idsOffer={}", "findAllByIds", listOffer);
 		for (Long id : ids) {
 			Optional<Offer> findById = offerRepository.findById(id);
 			if (findById.isEmpty()) {
