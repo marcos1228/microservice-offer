@@ -1,5 +1,10 @@
 package com.offer.service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
@@ -10,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.offer.domain.dto.request.OfferDtoRequest;
 import com.offer.domain.dto.request.OfferUpdateDtoRequest;
+import com.offer.domain.dto.response.OfferDTOResponseList;
 import com.offer.domain.dto.response.OfferDtoResponse;
 import com.offer.domain.model.Offer;
 import com.offer.exception.BusinessException;
@@ -33,6 +39,18 @@ public class OfferService {
 		Offer offer = offerRepository.findById(id)
 				.orElseThrow(() -> new BusinessException(messageBuilder.getMessage("message.exception")));
 		return modelMapper.map(offer, OfferDtoResponse.class);
+	}
+
+	public List<Long> findAllByIdIn(List<Long> ids) {
+		List<Long> listOffer = new ArrayList<>();
+		for (Long id : ids) {
+			Optional<Offer> findById = offerRepository.findById(id);
+			if (findById.isEmpty()) {
+				listOffer.add(id);
+			}
+
+		}
+		return listOffer;
 	}
 
 	public Page<OfferDtoResponse> findByTitle(String title, Pageable pageable) {
