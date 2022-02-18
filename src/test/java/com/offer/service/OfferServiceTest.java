@@ -35,32 +35,32 @@ public class OfferServiceTest {
 	@Mock
 	 MessageBuilder messageBuilder;
 
-	@Test
-	public void getOfferById_WhenSendIdOfferValid_ExpectedSucess() {
-		var offer = ScenarioFactory.newOffer();
-		var optionalOffer = ScenarioFactory.newOptionalOffer();
-		var offerDtoResponse = ScenarioFactory.offerDtoResponse();
-		when(offerRepository.findById(offer.getId())).thenReturn(optionalOffer);
-		when(modelMapper.map(offer, OfferDtoResponse.class)).thenReturn(offerDtoResponse);
+//	@Test
+//	public void getOfferById_WhenSendIdOfferValid_ExpectedSucess() {
+//		var offer = ScenarioFactory.newOffer();
+//		var optionalOffer = ScenarioFactory.newOptionalOffer();
+//		var offerDtoResponse = ScenarioFactory.offerDtoResponse();
+//		when(offerRepository.findById(offer.getId())).thenReturn(optionalOffer);
+//		when(modelMapper.map(offer, OfferDtoResponse.class)).thenReturn(offerDtoResponse);
+//
+//		offerService.getOfferById(1L);
+//
+//		verify(offerRepository, times(1)).findById(1L);
+//		verify(modelMapper, times(1)).map(offer, OfferDtoResponse.class);
+//
+//	}
 
-		offerService.getOfferById(1L);
-
-		verify(offerRepository, times(1)).findById(1L);
-		verify(modelMapper, times(1)).map(offer, OfferDtoResponse.class);
-
-	}
-
-	@Test
-	public void getOfferById_WhenSendIdOfferInvalid_ExpectedException() {
-		var optionalOfferNulo = ScenarioFactory.optionalOfferNulo();
-		when(offerRepository.findById(3L)).thenReturn(optionalOfferNulo);
-
-		assertThatThrownBy(() -> offerService.getOfferById(3L)).isInstanceOf(BusinessException.class)
-				.hasMessage(messageBuilder.getMessage("message.exception"));
-
-		verify(offerRepository, times(1)).findById(3L);
-
-	}
+//	@Test
+//	public void getOfferById_WhenSendIdOfferInvalid_ExpectedException() {
+//		var optionalOfferNulo = ScenarioFactory.optionalOfferNulo();
+//		when(offerRepository.findById(3L)).thenReturn(optionalOfferNulo);
+//
+//		assertThatThrownBy(() -> offerService.getOfferById(3L)).isInstanceOf(BusinessException.class)
+//				.hasMessage(messageBuilder.getMessage("message.exception"));
+//
+//		verify(offerRepository, times(1)).findById(3L);
+//
+//	}
 
 	@Test
 	public void save_WhenReceivingOfferRequestDtoWithAllValidFields_ExpectedSucess() {

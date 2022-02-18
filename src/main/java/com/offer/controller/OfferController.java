@@ -24,9 +24,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.offer.domain.dto.request.OfferDtoRequest;
 import com.offer.domain.dto.request.OfferUpdateDtoRequest;
-import com.offer.domain.dto.response.OfferDTOResponseList;
 import com.offer.domain.dto.response.OfferDtoResponse;
-import com.offer.domain.model.Offer;
+
 import com.offer.service.OfferService;
 
 import io.swagger.annotations.Api;
@@ -43,7 +42,7 @@ import lombok.extern.slf4j.Slf4j;
 public class OfferController {
 	@Autowired
 	private OfferService service;
-	
+
 	@ApiOperation(value = "Buscar varias ofertas pelos IDS", notes = "Este endpoint busca varias ofertas pelos ids")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Oferta encontrada com sucesso"),
 			@ApiResponse(code = 404, message = "Oferta não encontrada"),
@@ -51,7 +50,7 @@ public class OfferController {
 			@ApiResponse(code = 500, message = "Erro interno do servidor") })
 	@PostMapping("/")
 	public ResponseEntity<List<Long>> findAllByIds(@RequestBody List<Long> ids) {
-		log.info("Method={} message={}","findAllByIds", "buscando por ids");
+		log.info("Method={} message={}", "findAllByIds", "buscando por ids");
 		return ResponseEntity.ok().body(service.findAllByIds(ids));
 	}
 

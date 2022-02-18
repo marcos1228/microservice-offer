@@ -2,12 +2,9 @@ package com.offer.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
-import org.aspectj.apache.bcel.generic.RET;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import com.offer.domain.dto.request.OfferDtoRequest;
 import com.offer.domain.dto.request.OfferUpdateDtoRequest;
-import com.offer.domain.dto.response.OfferDTOResponseList;
 import com.offer.domain.dto.response.OfferDtoResponse;
 import com.offer.domain.model.Offer;
 import com.offer.exception.BusinessException;
@@ -35,16 +31,14 @@ public class OfferService {
 	@Autowired
 	private MessageBuilder messageBuilder;
 
-
 	public List<Long> findAllByIds(List<Long> ids) {
 		List<Long> listOffer = new ArrayList<>();
 		log.info("Method={} idsOffer={}", "findAllByIds", listOffer);
 		for (Long id : ids) {
-			Optional<Offer> findById = offerRepository.findById(id);
-			if (findById.isEmpty()) {
+			boolean findById = offerRepository.findByIds(id);
+			if (findById == false) {
 				listOffer.add(id);
 			}
-
 		}
 		return listOffer;
 	}
