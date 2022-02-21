@@ -5,6 +5,9 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -35,20 +38,15 @@ public class OfferServiceTest {
 	@Mock
 	 MessageBuilder messageBuilder;
 
-//	@Test
-//	public void getOfferById_WhenSendIdOfferValid_ExpectedSucess() {
-//		var offer = ScenarioFactory.newOffer();
-//		var optionalOffer = ScenarioFactory.newOptionalOffer();
-//		var offerDtoResponse = ScenarioFactory.offerDtoResponse();
-//		when(offerRepository.findById(offer.getId())).thenReturn(optionalOffer);
-//		when(modelMapper.map(offer, OfferDtoResponse.class)).thenReturn(offerDtoResponse);
-//
-//		offerService.getOfferById(1L);
-//
-//		verify(offerRepository, times(1)).findById(1L);
-//		verify(modelMapper, times(1)).map(offer, OfferDtoResponse.class);
-//
-//	}
+	@Test
+	public void findAllByIds_WhenSendListIdOffer_ExpectedSucess() {
+		var offer = ScenarioFactory.newOffer();
+		Boolean newBooleanOffer = ScenarioFactory.newBooleanOffer();
+		when(offerRepository.findByIds(offer.getId())).thenReturn(newBooleanOffer);
+		List<Long> lista = Arrays.asList(1l, 5l, 8l, 7l, 4l, 6l, 3l, 2l);
+		offerService.findAllByIds(lista);
+		verify(offerRepository, times(1)).findByIds(1L);
+	}
 
 //	@Test
 //	public void getOfferById_WhenSendIdOfferInvalid_ExpectedException() {

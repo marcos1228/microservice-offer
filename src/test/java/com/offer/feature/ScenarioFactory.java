@@ -58,6 +58,11 @@ public class ScenarioFactory {
 
 	}
 
+	public static Boolean newBooleanOffer() {
+		return Boolean.valueOf(true);
+
+	}
+	
 	public static Optional<Offer> optionalOfferNulo() {
 		return Optional.empty();
 	}
