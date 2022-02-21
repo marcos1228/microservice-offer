@@ -51,7 +51,7 @@ public class OfferController {
 	@PostMapping("/")
 	public ResponseEntity<List<Long>> findAllByIds(@RequestBody List<Long> ids) {
 		log.info("Method={} message={}", "findAllByIds", "buscando por ids");
-		return ResponseEntity.ok().body(service.findAllByIds(ids));
+		return ResponseEntity.ok().body(service.findMissingIds(ids));
 	}
 
 	@ApiOperation(value = "Retorna uma lista de oferta", notes = "Este endpoint retorna uma lista de oferta")

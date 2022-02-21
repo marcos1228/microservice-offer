@@ -27,38 +27,34 @@ import lombok.var;
 @RunWith(MockitoJUnitRunner.class)
 public class OfferServiceTest {
 	@InjectMocks
-	 OfferService offerService;
+	OfferService offerService;
 
 	@Mock
-	 ModelMapper modelMapper;
+	ModelMapper modelMapper;
 
 	@Mock
-	 OfferRepository offerRepository;
+	OfferRepository offerRepository;
 
 	@Mock
-	 MessageBuilder messageBuilder;
+	MessageBuilder messageBuilder;
 
 	@Test
-	public void findAllByIds_WhenSendListIdOffer_ExpectedSucess() {
+	public void findMissingIds_WhenSendingLitIdsOfferReturnTrue_ExpectedSucess() {
 		var offer = ScenarioFactory.newOffer();
-		Boolean newBooleanOffer = ScenarioFactory.newBooleanOffer();
+		Boolean newBooleanOffer = ScenarioFactory.newBooleanTrueOffer();
 		when(offerRepository.findByIds(offer.getId())).thenReturn(newBooleanOffer);
 		List<Long> lista = Arrays.asList(1l, 5l, 8l, 7l, 4l, 6l, 3l, 2l);
-		offerService.findAllByIds(lista);
+		offerService.findMissingIds(lista);
 		verify(offerRepository, times(1)).findByIds(1L);
 	}
 
-//	@Test
-//	public void getOfferById_WhenSendIdOfferInvalid_ExpectedException() {
-//		var optionalOfferNulo = ScenarioFactory.optionalOfferNulo();
-//		when(offerRepository.findById(3L)).thenReturn(optionalOfferNulo);
-//
-//		assertThatThrownBy(() -> offerService.getOfferById(3L)).isInstanceOf(BusinessException.class)
-//				.hasMessage(messageBuilder.getMessage("message.exception"));
-//
-//		verify(offerRepository, times(1)).findById(3L);
-//
-//	}
+	@Test
+	public void findMissingIds_WhenSendingLitIdsOfferReturnFalse_ExpectedException() {
+		when(offerRepository.findByIds(2l)).thenReturn(ScenarioFactory.newBooleanFalseOffer());
+		List<Long> lista = Arrays.asList(2l);
+		offerService.findMissingIds(lista);
+		verify(offerRepository, times(1)).findByIds(2L);
+	}
 
 	@Test
 	public void save_WhenReceivingOfferRequestDtoWithAllValidFields_ExpectedSucess() {
@@ -117,7 +113,7 @@ public class OfferServiceTest {
 		when(offerRepository.findByidProduct(2L)).thenReturn(optionalOffer);
 		offerService.delete(2L);
 		verify(offerRepository, times(1)).findByidProduct(2L);
-		verify(offerRepository,times(1)).delete(offer);
+		verify(offerRepository, times(1)).delete(offer);
 
 	}
 
@@ -125,8 +121,9 @@ public class OfferServiceTest {
 	public void delete_WhenReceivingInvalidBaseId_ExpectedException() {
 		var optionalOfferNulo = ScenarioFactory.optionalOfferNulo();
 		when(offerRepository.findByidProduct(3L)).thenReturn(optionalOfferNulo);
-		assertThatThrownBy(() -> offerService.delete(3L)).isInstanceOf(BusinessException.class).hasMessage(messageBuilder.getMessage("message.exception"));
-		verify(offerRepository,times(1)).findByidProduct(3L);
-		
+		assertThatThrownBy(() -> offerService.delete(3L)).isInstanceOf(BusinessException.class)
+				.hasMessage(messageBuilder.getMessage("message.exception"));
+		verify(offerRepository, times(1)).findByidProduct(3L);
+
 	}
 }

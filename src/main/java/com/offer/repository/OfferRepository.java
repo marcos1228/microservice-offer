@@ -1,6 +1,5 @@
 package com.offer.repository;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -15,7 +14,6 @@ import com.offer.domain.model.Offer;
 @Repository
 public interface OfferRepository extends JpaRepository<Offer, Long> {
 	@Query("SELECT CASE WHEN COUNT(c) > 0 THEN true ELSE false END FROM Offer c WHERE c.id = :id")
-
 	boolean findByIds(Long id);
 	public Optional<Offer> findByidProduct(Long idProduct);
 

@@ -31,7 +31,9 @@ public class OfferService {
 	@Autowired
 	private MessageBuilder messageBuilder;
 
-	public List<Long> findAllByIds(List<Long> ids) {
+	
+
+	public List<Long> findMissingIds(List<Long> ids) {
 		List<Long> listOffer = new ArrayList<>();
 		log.info("Method={} idsOffer={}", "findAllByIds", listOffer);
 		for (Long id : ids) {
