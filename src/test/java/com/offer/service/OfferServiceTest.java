@@ -40,20 +40,18 @@ public class OfferServiceTest {
 
 	@Test
 	public void findMissingIds_WhenSendingLitIdsOfferReturnTrue_ExpectedSucess() {
-		var offer = ScenarioFactory.newOffer();
-		Boolean newBooleanOffer = ScenarioFactory.newBooleanTrueOffer();
-		when(offerRepository.findByIds(offer.getId())).thenReturn(newBooleanOffer);
-		List<Long> lista = Arrays.asList(1l, 5l, 8l, 7l, 4l, 6l, 3l, 2l);
+		List<Long> lista = Arrays.asList(1l, 5l, 8l);
+		when(offerRepository.findByIds(1l)).thenReturn(true);
 		offerService.findMissingIds(lista);
 		verify(offerRepository, times(1)).findByIds(1L);
 	}
 
 	@Test
 	public void findMissingIds_WhenSendingLitIdsOfferReturnFalse_ExpectedException() {
-		when(offerRepository.findByIds(2l)).thenReturn(ScenarioFactory.newBooleanFalseOffer());
-		List<Long> lista = Arrays.asList(2l);
+		List<Long> lista = Arrays.asList(1l, 5l, 8l);
+		when(offerRepository.findByIds(5l)).thenReturn(false);
 		offerService.findMissingIds(lista);
-		verify(offerRepository, times(1)).findByIds(2L);
+		verify(offerRepository, times(1)).findByIds(5l);
 	}
 
 	@Test
