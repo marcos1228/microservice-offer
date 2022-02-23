@@ -1,6 +1,8 @@
 package com.offer.service;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -8,6 +10,7 @@ import static org.mockito.Mockito.when;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -41,17 +44,50 @@ public class OfferServiceTest {
 	@Test
 	public void findMissingIds_WhenSendingLitIdsOfferReturnTrue_ExpectedSucess() {
 		List<Long> lista = Arrays.asList(1l, 5l, 8l);
+		when(offerRepository.findByIds(5l)).thenReturn(true);
 		when(offerRepository.findByIds(1l)).thenReturn(true);
-		offerService.findMissingIds(lista);
+		when(offerRepository.findByIds(8l)).thenReturn(true);
+
+		List<Long> missingIds = offerService.findMissingIds(lista);
+		assertThat(missingIds.isEmpty(), equalTo(true));
+
+		verify(offerRepository, times(1)).findByIds(5L);
 		verify(offerRepository, times(1)).findByIds(1L);
+		verify(offerRepository, times(1)).findByIds(8L);
 	}
 
 	@Test
-	public void findMissingIds_WhenSendingLitIdsOfferReturnFalse_ExpectedException() {
+	public void findMissingIds_WhenSendingLitIdsOfferReturnTrueAndFalse_ExpectedSucess() {
 		List<Long> lista = Arrays.asList(1l, 5l, 8l);
 		when(offerRepository.findByIds(5l)).thenReturn(false);
-		offerService.findMissingIds(lista);
+		when(offerRepository.findByIds(1l)).thenReturn(true);
+		when(offerRepository.findByIds(8l)).thenReturn(false);
+
+		List<Long> missingIds = offerService.findMissingIds(lista);
+		if (!missingIds.get(0).equals(5l) && !missingIds.get(1).equals(8l)) {
+			Assert.fail();
+		}
+
+		verify(offerRepository, times(1)).findByIds(5L);
+		verify(offerRepository, times(1)).findByIds(1L);
+		verify(offerRepository, times(1)).findByIds(8L);
+	}
+
+	@Test
+	public void findMissingIds_WhenSendingLitIdsOfferReturnFalse_ExpectedSucess() {
+		List<Long> lista = Arrays.asList(1l, 5l, 8l);
+		when(offerRepository.findByIds(1l)).thenReturn(false);
+		when(offerRepository.findByIds(5l)).thenReturn(false);
+		when(offerRepository.findByIds(8l)).thenReturn(false);
+		List<Long> missingIds = offerService.findMissingIds(lista);
+		if (missingIds.get(0).equals(1l) && missingIds.get(1).equals(5l)) {
+			Assert.assertEquals(1l, 1l);
+			Assert.assertEquals(5l, 5l);
+			Assert.assertEquals(8l, 8l);
+		}
+		verify(offerRepository, times(1)).findByIds(1l);
 		verify(offerRepository, times(1)).findByIds(5l);
+		verify(offerRepository, times(1)).findByIds(8l);
 	}
 
 	@Test
