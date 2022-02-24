@@ -1,5 +1,8 @@
 package com.offer.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
@@ -28,11 +31,18 @@ public class OfferService {
 	@Autowired
 	private MessageBuilder messageBuilder;
 
-	public OfferDtoResponse getOfferById(Long id) {
-		log.info("Method={} idOffer={}", "getOfferById", id);
-		Offer offer = offerRepository.findById(id)
-				.orElseThrow(() -> new BusinessException(messageBuilder.getMessage("message.exception")));
-		return modelMapper.map(offer, OfferDtoResponse.class);
+	
+
+	public List<Long> findMissingIds(List<Long> ids) {
+		List<Long> listOffer = new ArrayList<>();
+		log.info("Method={} idsOffer={}", "findAllByIds", listOffer);
+		for (Long id : ids) {
+			boolean findById = offerRepository.findByIds(id);
+			if (findById == false) {
+				listOffer.add(id);
+			}
+		}
+		return listOffer;
 	}
 
 	public Page<OfferDtoResponse> findByTitle(String title, Pageable pageable) {
